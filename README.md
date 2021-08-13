@@ -39,6 +39,7 @@ At a time of unprecedented distancing, this web application aims to connect user
    - [Mapbox](#Mapbox)
 2. [Environment Configuration](#EnvironmentConfig)
 3. [Dependencies](#Dependencies)
+4. [Future features](#Future-Features)
 
 ## Slugify
 
@@ -263,3 +264,8 @@ STRIPE_SECRET_KEY=
  "xss-clean": "^0.1.1"
  },
 ```
+
+## Future-Features
+
+• Currently exploring application integration with Stripe for payment services.
+• Plans to build frontend with HTML and SASS, and convert it into a Pug template.
