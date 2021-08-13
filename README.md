@@ -275,5 +275,5 @@ STRIPE_SECRET_KEY=
 
 ## Future-Features
 
-• Currently exploring application integration with Stripe for payment services.
-• Plans to build frontend with HTML and SASS, and convert it into a Pug template.
+1. Currently exploring application integration with Stripe for payment services.
+2. Plans to build frontend with HTML and SASS, and convert it into a Pug template.
