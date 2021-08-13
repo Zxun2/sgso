@@ -15,6 +15,7 @@ At a time of unprecedented distancing, this web application aims to connect user
 1. Library Used:
    <details>
    <summary>Libraries</summary>
+
    <p>
       + [Slugify](#Slugify)
       + [Validator](#Validators)
