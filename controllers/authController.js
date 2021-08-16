@@ -116,6 +116,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // GRANT ACCESS TO PROTECTED ROUTE
   req.user = currentUser;
+  // Allows Pug to have access to the information
   res.locals.user = currentUser;
   next();
 });
@@ -222,6 +223,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
 // Ensure no error is thrown to the global error handler
 // Only for rendered pages, no errors!
+// Sole purpose to allow Pug have access to the user.
 exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {
     try {
