@@ -13,8 +13,10 @@ At a time of unprecedented distancing, this web application aims to connect user
 ## Table of Contents (To be updated)
 
 1. [Application Structure](#Application-Structure)
-
-2. Library Used:
+2. [Environment Configuration](#EnvironmentConfig)
+3. [Dependencies](#Dependencies)
+4. [Future features](#Future-Features)
+5. Library Used:
    <details>
    <summary>Libraries</summary>
 
@@ -47,11 +49,80 @@ At a time of unprecedented distancing, this web application aims to connect user
 
    </details>
 
-3. [Environment Configuration](#EnvironmentConfig)
-4. [Dependencies](#Dependencies)
-5. [Future features](#Future-Features)
-
 ## Application-Structure
+
+A clearer version can be found in the folder labelled "Application Structure".
+
+![image](https://user-images.githubusercontent.com/63457492/129500508-f8088c2c-ee74-4a87-8bbf-6bb3c815bd08.png)
+
+## EnvironmentConfig
+
+Environment Configuration for the project.
+
+```text
+NODE_ENV=development
+PORT=3000
+
+DATABASE_PASSWORD=
+DATABASE=
+DATABASE_LOCAL=
+
+JWT_SECRET=
+JWT_EXPIRES_IN=90d
+JWT_COOKIE_EXPIRES_IN=90
+
+EMAIL_USERNAME=
+EMAIL_PASSWORD=
+EMAIL_HOST=
+EMAIL_PORT=
+
+EMAIL_FROM=zxun2000@gmail.com
+
+SENDGRID_USERNAME=apikey
+SENDGRID_PASSWORD=
+
+STRIPE_SECRET_KEY=
+```
+
+## Dependencies
+
+Dependencies for the project are stated below:
+
+```js
+"dependencies": {
+ "@babel/polyfill": "^7.12.1",
+ "axios": "^0.21.1",
+ "bcryptjs": "^2.4.3",
+ "cookie-parser": "^1.4.5",
+ "core-js": "^3.6.4",
+ "dotenv": "^10.0.0",
+ "express": "^4.17.1",
+ "express-csp": "^0.1.3",
+ "express-mongo-sanitize": "^2.1.0",
+ "express-rate-limit": "^5.3.0",
+ "helmet": "^4.6.0",
+ "hpp": "^0.2.3",
+ "html-to-text": "^8.0.0",
+ "jsonwebtoken": "^8.5.1",
+ "mapbox-gl": "^2.4.0",
+ "mongoose": "^5.13.3",
+ "morgan": "^1.10.0",
+ "multer": "^1.4.2",
+ "nodemailer": "^6.6.3",
+ "pug": "^3.0.2",
+ "regenerator-runtime": "^0.13.7",
+ "sharp": "^0.28.3",
+ "slugify": "^1.6.0",
+ "stripe": "^8.168.0",
+ "validator": "^13.6.0",
+ "xss-clean": "^0.1.1"
+ },
+```
+
+## Future-Features
+
+1. Currently exploring application integration with Stripe for payment services.
+2. Plans to build frontend with HTML and SASS, and convert it into a Pug template.
 
 ## Slugify
 
@@ -216,68 +287,3 @@ Promise based HTTP client for the browser and node.js
 A [node.js](https://nodejs.org/) and browser JavaScript client to Mapbox services.
 
 [For more information](https://github.com/mapbox/mapbox-sdk-js)
-
-## EnvironmentConfig
-
-```text
-NODE_ENV=development
-PORT=3000
-
-DATABASE_PASSWORD=
-DATABASE=
-DATABASE_LOCAL=
-
-JWT_SECRET=
-JWT_EXPIRES_IN=90d
-JWT_COOKIE_EXPIRES_IN=90
-
-EMAIL_USERNAME=
-EMAIL_PASSWORD=
-EMAIL_HOST=
-EMAIL_PORT=
-
-EMAIL_FROM=zxun2000@gmail.com
-
-SENDGRID_USERNAME=apikey
-SENDGRID_PASSWORD=
-
-STRIPE_SECRET_KEY=
-```
-
-## Dependencies
-
-```js
-"dependencies": {
- "@babel/polyfill": "^7.12.1",
- "axios": "^0.21.1",
- "bcryptjs": "^2.4.3",
- "cookie-parser": "^1.4.5",
- "core-js": "^3.6.4",
- "dotenv": "^10.0.0",
- "express": "^4.17.1",
- "express-csp": "^0.1.3",
- "express-mongo-sanitize": "^2.1.0",
- "express-rate-limit": "^5.3.0",
- "helmet": "^4.6.0",
- "hpp": "^0.2.3",
- "html-to-text": "^8.0.0",
- "jsonwebtoken": "^8.5.1",
- "mapbox-gl": "^2.4.0",
- "mongoose": "^5.13.3",
- "morgan": "^1.10.0",
- "multer": "^1.4.2",
- "nodemailer": "^6.6.3",
- "pug": "^3.0.2",
- "regenerator-runtime": "^0.13.7",
- "sharp": "^0.28.3",
- "slugify": "^1.6.0",
- "stripe": "^8.168.0",
- "validator": "^13.6.0",
- "xss-clean": "^0.1.1"
- },
-```
-
-## Future-Features
-
-1. Currently exploring application integration with Stripe for payment services.
-2. Plans to build frontend with HTML and SASS, and convert it into a Pug template.
