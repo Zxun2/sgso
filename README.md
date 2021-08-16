@@ -72,15 +72,15 @@ Source: ![https://www.redhat.com/en/topics/api/what-is-a-rest-api](https://www.r
 In general, the API is expected to follow the following guidelines:
 
 1. The API should be separated into logical resources.
-   => Tours, Reviews, Users etc.
+   - Tours, Reviews, Users etc.
 2. Exposed structured, resource-based URLs.
-   => {API_URL}/api/v1/users/:id/address/:address
+   - {API_URL}/api/v1/users/:id/address/:address
 3. Data transfer via HTTP Methods
-   => GET, POST, PATCH, DELETE
+   - GET, POST, PATCH, DELETE
 4. Send data is JSON Format
 5. Be stateless
-   => All state is handled on the client. This means that each request should contain all the information necessary in order to process a certain request. The API should have to remember previous requests.
-   => implemented within application: LoggedIn, Paginate
+   - All state is handled on the client. This means that each request should contain all the information necessary in order to process a certain request. The API should have to remember previous requests.
+   - implemented within application: LoggedIn, Paginate
 
 ## EnvironmentConfig
 
