@@ -12,7 +12,9 @@ At a time of unprecedented distancing, this web application aims to connect user
 
 ## Table of Contents (To be updated)
 
-1. Library Used:
+1. [Application Structure](#Application-Structure)
+
+2. Library Used:
    <details>
    <summary>Libraries</summary>
 
@@ -45,9 +47,11 @@ At a time of unprecedented distancing, this web application aims to connect user
 
    </details>
 
-2. [Environment Configuration](#EnvironmentConfig)
-3. [Dependencies](#Dependencies)
-4. [Future features](#Future-Features)
+3. [Environment Configuration](#EnvironmentConfig)
+4. [Dependencies](#Dependencies)
+5. [Future features](#Future-Features)
+
+## Application-Structure
 
 ## Slugify
 

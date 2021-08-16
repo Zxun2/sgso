@@ -71,6 +71,8 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+////////////////////////
+// Checks if the password has been modified. If so, update field.
 userSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
   // This field is first created when the user signs up for the first time!
@@ -79,12 +81,15 @@ userSchema.pre('save', function (next) {
   next();
 });
 
+/////////////////////////////////////////////////
+// REMOVES ALL NON-ACTIVE ACCOUNTS FROM QUERY
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
 
   next();
 });
 
+/////////////////////////////////////////////////
 // Instance - Methods accessible by all documents
 // Unable to access this.password since select is set to false in schema
 // Hence the need to pass in userPassword
@@ -95,6 +100,8 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
+/////////////////////////////////////////////////
+// cHECK IF PASSWORD FIELD IS CHANGED AFTER LOGGING IN
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
@@ -108,13 +115,17 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   return false;
 };
 
+/////////////////////////////////////////////////
+// CREATE PASSWORD RESET TOKEN (LESS SECURE)
 userSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex');
+  // SET PASSWORDRESETTOKEN FIELD
   this.passwordResetToken = crypto
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
   console.log({ resetToken }, this.passwordResetToken);
+  // TOKEN EXPIRES IN 10MINS
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;

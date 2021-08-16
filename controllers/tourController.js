@@ -24,6 +24,7 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
+////////////////////////////////////
 // Upload multiple images
 // upload.array('images', 5)
 exports.uploadTourImages = upload.fields([
@@ -31,6 +32,7 @@ exports.uploadTourImages = upload.fields([
   { name: 'images', maxCount: 3 },
 ]);
 
+////////////////////////////////////
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
   if (!req.files.imageCover && !req.files.images) return next();
 
@@ -194,6 +196,7 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
   });
 });
 
+// Returns all tours/spots in database nearest to user.
 exports.getDistances = catchAsync(async (req, res, next) => {
   const { latlng, unit } = req.params;
   const [lat, lng] = latlng.split(',');

@@ -20,6 +20,7 @@ const factory = require('./handlerFactory');
 //   },
 // });
 
+/////////////////////////////////////////////////
 // Upload images
 // Saving images to memory storage instead (creates a buffer)
 const multerStorage = multer.memoryStorage();
@@ -36,9 +37,12 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
 });
+
+/////////////////////////////////////////////////
 // Uploads photo to memory
 exports.uploadPhoto = upload.single('photo');
 
+/////////////////////////////////////////////////
 // Middleware to resize uploaded photo
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
@@ -52,6 +56,7 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   next();
 });
 
+//////////////////////////
 // Helper function for UpdateMe Function
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
