@@ -13,10 +13,11 @@ At a time of unprecedented distancing, this web application aims to connect user
 ## Table of Contents (To be updated)
 
 1. [Application Structure](#Application-Structure)
-2. [Environment Configuration](#EnvironmentConfig)
-3. [Dependencies](#Dependencies)
-4. [Future features](#Future-Features)
-5. Library Used:
+2. [API Design](#API-Design)
+3. [Environment Configuration](#EnvironmentConfig)
+4. [Dependencies](#Dependencies)
+5. [Future features](#Future-Features)
+6. Library Used:
    <details>
    <summary>Libraries</summary>
 
@@ -54,6 +55,32 @@ At a time of unprecedented distancing, this web application aims to connect user
 A clearer version can be found in the folder labelled "Application Structure".
 
 ![image](https://user-images.githubusercontent.com/63457492/129500508-f8088c2c-ee74-4a87-8bbf-6bb3c815bd08.png)
+
+## API-Design
+
+The project has adopted the REST architectural style.
+
+<details>
+<summary> Read this if you are unclear what exactly is a REST API </summary>
+
+A REST API (also known as RESTful API) is an application programming interface (API or web API) that conforms to the constraints of REST architectural style and allows for interaction with RESTful web services. REST stands for representational state transfer and was created by computer scientist Roy Fielding.
+
+Source: ![https://www.redhat.com/en/topics/api/what-is-a-rest-api](https://www.redhat.com/en/topics/api/what-is-a-rest-api)
+
+</details>
+
+In general, the API is expected to follow the following guidelines:
+
+1. The API should be separated into logical resources.
+   => Tours, Reviews, Users etc.
+2. Exposed structured, resource-based URLs.
+   => {API_URL}/api/v1/users/:id/address/:address
+3. Data transfer via HTTP Methods
+   => GET, POST, PATCH, DELETE
+4. Send data is JSON Format
+5. Be stateless
+   => All state is handled on the client. This means that each request should contain all the information necessary in order to process a certain request. The API should have to remember previous requests.
+   => implemented within application: LoggedIn, Paginate
 
 ## EnvironmentConfig
 
