@@ -30,7 +30,7 @@ router.route('/top-5-cheap').get(aliasTopTours, getAllTours);
 router.route('/tour-stats').get(getTourStats);
 router
   .route('/monthly-plan/:year')
-  .get(protect, restrictTo('admin', 'lead-guide', 'guide'), getMonthlyPlan);
+  .get(protect, restrictTo('admin'), getMonthlyPlan);
 
 router
   .route('/tours-within/:distance/center/:latlng/unit/:unit')
@@ -40,14 +40,14 @@ router.route('/distance/:latlng/unit/:unit').get(getDistances);
 router
   .route('/')
   .get(getAllTours)
-  .post(protect, restrictTo('admin', 'lead-guide'), createTour);
+  .post(protect, restrictTo('admin'), createTour);
 router
   .route('/:id')
   .get(getTour)
-  .delete(protect, restrictTo('admin', 'lead-guide'), deleteTour)
+  .delete(protect, restrictTo('admin'), deleteTour)
   .patch(
     protect,
-    restrictTo('admin', 'lead-guide'),
+    restrictTo('admin'),
     uploadTourImages,
     resizeTourImages,
     updateTour
