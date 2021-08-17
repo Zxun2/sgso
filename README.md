@@ -17,7 +17,8 @@ At a time of unprecedented distancing, this web application aims to connect user
 3. [Environment Configuration](#EnvironmentConfig)
 4. [Dependencies](#Dependencies)
 5. [Future features](#Future-Features)
-6. Library Used:
+6. [Security Best Practices](#Security_Best_Practices)
+7. Library Used:
    <details>
    <summary>Libraries</summary>
 
@@ -52,9 +53,7 @@ At a time of unprecedented distancing, this web application aims to connect user
 
 ## Application-Structure
 
-A clearer version can be found in the folder labelled "Application Structure".
-
-![image](https://user-images.githubusercontent.com/63457492/129500508-f8088c2c-ee74-4a87-8bbf-6bb3c815bd08.png)
+The entire application infrastructure can be found in the folder labelled "Application Structure". Please take the time to look through them.
 
 ## API-Design
 
@@ -72,15 +71,74 @@ Source: ![https://www.redhat.com/en/topics/api/what-is-a-rest-api](https://www.r
 In general, the API is expected to follow the following guidelines:
 
 1. The API should be separated into logical resources.
+
    - Tours, Reviews, Users etc.
+
 2. Exposed structured, resource-based URLs.
+
    - {API_URL}/api/v1/users/:id/address/:address
+
 3. Data transfer via HTTP Methods
+
    - GET, POST, PATCH, DELETE
+
 4. Send data is JSON Format
+
 5. Be stateless
    - All state is handled on the client. This means that each request should contain all the information necessary in order to process a certain request. The API should have to remember previous requests.
    - implemented within application: LoggedIn, Paginate
+
+## Security_Best_Practices
+
+1. Compromised Database
+
+   - Strongly encrypt passwords with salt and hash (bcrypt)
+   - Strongly encrypt password reset tokens
+
+2. Brute force Attacks
+
+   - Use bcrypt to make login requests slow
+   - Implemented rate limiting
+
+3. Cross-site scripting attacks
+
+   - Store JWT in HTTPOnly cookies
+   - Sanitize user input data
+   - Set special HTTP headers (helmet package)
+
+4. Denial of Service Attack
+
+   - Implemented rate limiting
+   - Limit body payload
+   - Avoid evil regular expressions
+
+5. NoSQL Query Injection
+
+   - Use mongoose for MongoDB (because of SchemaTypes)
+   - Sanitize user input data
+
+6. OTHER BEST PRACTICES
+   - Always use HTTPS
+   - Create random password reset tokens with expiry dates
+   - Deny access to JWT after password change
+   - Don’t commit sensitive config data to Git
+   - Don’t send error details to clients
+   - Prevent parameter pollution causing Uncaught Exception
+
+## Future-Features
+
+1. Currently exploring application integration with Stripe for payment services.
+2. Plans to build frontend with HTML and SASS, and convert it into a Pug template.
+3. Implement advanced authentication features: confirm user email, keep users logged in with refresh tokens, 2FA etc.
+
+- Security Suggestions:
+  - Prevent Cross-Site Request Forgery (csurf package)
+  - Require re-authentication before a high-value action
+  - Implement a blacklist of untrusted JWT
+  - Confirm user email address after first creating account
+  - Keep user logged in with refresh tokens
+  - Implement two-factor authentication
+  - Implement maximum login attempts
 
 ## EnvironmentConfig
 
@@ -145,11 +203,6 @@ Dependencies for the project are stated below:
  "xss-clean": "^0.1.1"
  },
 ```
-
-## Future-Features
-
-1. Currently exploring application integration with Stripe for payment services.
-2. Plans to build frontend with HTML and SASS, and convert it into a Pug template.
 
 ## Slugify
 

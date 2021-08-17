@@ -47,6 +47,7 @@ class APIFeatures {
     // 4) Pagination
     const page = this.queryString.page * 1 || 1;
     const limit = this.queryString.limit * 1 || 100;
+    // Example page 2, limit = 50, skips first 50 query results.
     const skip = (page - 1) * limit;
 
     this.query = this.query.skip(skip).limit(limit);
