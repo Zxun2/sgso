@@ -51,6 +51,8 @@ At a time of unprecedented distancing, this web application aims to connect user
 
    </details>
 
+---
+
 ## Application-Structure
 
 The entire application infrastructure can be found in the folder labelled "Application Structure". Please take the time to look through them.
