@@ -128,16 +128,18 @@ exports.getTourStats = catchAsync(async (req, res, next) => {
     },
     {
       $group: {
-        _id: { $toUpper: '$difficulty' },
-        numTours: { $sum: 1 },
+        _id: { $toUpper: '$difficulty' }, // group by
+        numTours: { $sum: 1 }, // add 1 for each document
         numRatings: { $sum: '$ratingsQuantity' },
-        avgRating: { $avg: '$ratingsAverage' },
+        avgRating: { $avg: '$ratingsAverage' }, // calculate avg of field
         avgPrice: { $avg: '$price' },
-        minPrice: { $min: '$price' },
-        maxPrice: { $max: '$price' },
+        minPrice: { $min: '$price' }, // min
+        maxPrice: { $max: '$price' }, // max
       },
     },
+    // use names specify above
     { $sort: { avgPrice: 1 } },
+    // Match a second time
     // { $match: { _id: { $ne: 'EASY' } } },
   ]);
   res.status(200).json({
@@ -153,13 +155,15 @@ exports.getTourStats = catchAsync(async (req, res, next) => {
 ///////////////////////////////////////////////
 // Aggregation Pipeline to get monthly plans
 exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
-  const year = req.params.year * 1;
+  const year = req.params.year * 1; // transform to number
   const plan = await Tour.aggregate([
     {
+      // deconstruct array field and output one document for each value in the array
       $unwind: '$startDates',
     },
     {
       $match: {
+        // match by start dates
         startDates: {
           $gte: new Date(`${year}-01-01`),
           $lte: new Date(`${year}-12-31`),
@@ -168,9 +172,9 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
     },
     {
       $group: {
-        _id: { $month: '$startDates' },
+        _id: { $month: '$startDates' }, // group by month of startDates
         numTourStarts: { $sum: 1 },
-        tours: { $push: '$name' },
+        tours: { $push: '$name' }, // create an array
       },
     },
     {
@@ -178,14 +182,15 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
     },
     {
       $project: {
+        // remove _id
         _id: 0,
       },
     },
     {
-      $sort: { numTourStarts: -1 },
+      $sort: { numTourStarts: -1 }, // sort by month
     },
     {
-      $limit: 12,
+      $limit: 12, // limit to 12 results
     },
   ]);
   res.status(200).json({

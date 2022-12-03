@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
+// to access .env files
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 //////////////////////////////
-// UNCAUGHT EXCEPTIONS
+// UNCAUGHT EXCEPTIONS (Should be placed before app)
 process.on('uncaughtException', (err) => {
   console.log('UNHANDLED EXCEPTION 💥 SHUTTING DOWN... ');
   console.log(err.name, err.message);
@@ -24,15 +25,19 @@ const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
+
 mongoose
-  // .connect(process.env.DATABASE_LOCAL, {
+  // .connect(process.env.DATABASE_LOCAL, { <= use this if developing locally
   .connect(DB, {
+    // Copy & Paste this
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('DB connected successfully 😂😂'));
+  .then((con) =>
+    console.log(con.connections, 'DB connected successfully 😂😂')
+  );
 
 //////////////////////////////
 // Listening for request
@@ -46,6 +51,8 @@ const server = app.listen(port, () => {
 process.on('unhandledRejection', (err) => {
   console.log('UNHANDLED REJECTIONS 💥 SHUTTING DOWN... ');
   console.log(err.name, err.message);
+
+  // Close server gracefully
   server.close(() => {
     // 1 - Rejections. 0 - Success.
     process.exit(1);

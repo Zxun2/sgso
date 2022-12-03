@@ -20,7 +20,12 @@ const reviewRouter = require('./reviewRoutes');
 // ROUTES
 const router = express.Router();
 
-// router.param('id', checkID);
+// PARAM MIDDLEWARE
+// Looking for params id only
+// router.param('id', (req, res, next, val) => {
+//    console.log(`Tour id is ${val}`);
+//    next();
+// });
 
 //////////////////////////////
 // Req incoming from /tours

@@ -34,6 +34,7 @@ const multerFilter = (req, file, cb) => {
 };
 
 const upload = multer({
+  // Storage and filter
   storage: multerStorage,
   fileFilter: multerFilter,
 });

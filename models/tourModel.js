@@ -64,7 +64,7 @@ const tourSchema = new mongoose.Schema(
     },
     summary: {
       type: String,
-      trim: true,
+      trim: true, // Remove all whitespaces at the beginning and the end
       required: [true, 'A tour must have a description'],
     },
     description: {
@@ -79,9 +79,10 @@ const tourSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
+      // Not shown to query results
       select: false,
     },
-    startDates: [Date],
+    startDates: [Date], // An array of dates
     secretTour: {
       type: Boolean,
       default: false,
@@ -90,7 +91,7 @@ const tourSchema = new mongoose.Schema(
       // GeoJSON
       type: {
         type: String,
-        default: 'Point',
+        default: 'Point', // Tells mongo this is a geo-coordinate
         enum: ['Point'],
       },
       coordinates: [Number],
@@ -118,6 +119,7 @@ const tourSchema = new mongoose.Schema(
     ],
   },
   {
+    // Whenever the document gets outputted as JSON, make sure that the virtual field exists
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
@@ -133,18 +135,18 @@ tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ startLocation: '2dsphere' });
 
 //////////////////////////////
-// VIRTUALS
+// VIRTUALS - WILL NOT BE PERSISTED TO THE DATABASE
 tourSchema.virtual('durationWeeks').get(function () {
+  // use a regular function to access the this keyword
   return this.duration / 7;
 });
 
 //////////////////////////////
 // VIRTUALS POPULATE - field not stored in the schema
 tourSchema.virtual('reviews', {
-  ref: 'Review',
-  // ID stored in 'tour' field in the Review Model
+  ref: 'Review', // Model we want to reference
+  // Connect the ID stored in 'tour' field in the Review Model to the ID stored in the '_id' field locally.
   foreignField: 'tour',
-  // ID stored in the '_id' field locally.
   localField: '_id',
 });
 
@@ -152,7 +154,7 @@ tourSchema.virtual('reviews', {
 // DOCUMENT MIDDLEWARE : runs before .save() and .create()
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
-  next();
+  next(); // remember to call next
 });
 
 //////////////////////////////
@@ -171,6 +173,7 @@ tourSchema.pre('save', async function (next) {
 
 //////////////////////////////
 // QUERY MIDDLEWARE
+// /^find/ deals with both findOne and findMany
 tourSchema.pre(/^find/, function (next) {
   this.find({ secretTour: { $ne: true } });
   this.start = Date.now();
@@ -199,6 +202,7 @@ tourSchema.pre('aggregate', function (next) {
   next();
 });
 
+// Create Model
 const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;

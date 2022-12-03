@@ -109,6 +109,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
       10
     );
 
+    // JWT is issue on login. If true, means user change after logging in.
     return JWTTimestamp < changedTimestamp;
   }
   // False means not changed.
@@ -124,7 +125,9 @@ userSchema.methods.createPasswordResetToken = function () {
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
+
   console.log({ resetToken }, this.passwordResetToken);
+
   // TOKEN EXPIRES IN 10MINS
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 

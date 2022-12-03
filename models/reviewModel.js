@@ -16,7 +16,7 @@ const reviewSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    // Parent Referencing
+    // Parent Referencing + populate
     tour: {
       type: mongoose.Schema.ObjectId,
       ref: 'Tour',
@@ -49,7 +49,9 @@ reviewSchema.pre(/^find/, function (next) {
   next();
 });
 
+// Each combination of tour and user must be unique
 reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
+
 //////////////////////////////
 // STATIC METHOD ON MODEL TO CALC AVERAGE RATINGS
 reviewSchema.statics.calcAverageRatings = async function (tourId) {
@@ -82,9 +84,7 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
 
 //////////////////////////////
 // DOCUMENT/QUERY MIDDLEWARE TO CALC AVERAGE RATINGS
-// If your post hook function takes at least 2 parameters,
-// mongoose will assume the second parameter is a next() function that
-// you will call to trigger the next middleware in the sequence.
+// If your post hook function takes at least 2 parameters, mongoose will assume the second parameter is a next() function that you will call to trigger the next middleware in the sequence.
 // Works after SAVIING/DELETING/UDPATING
 reviewSchema.post(/save|^findOneAnd/, async (doc, next) => {
   await doc.constructor.calcAverageRatings(doc.tour);

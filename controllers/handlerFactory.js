@@ -19,6 +19,7 @@ exports.updateOne = (Model) =>
   catchAsync(async (req, res, next) => {
     // Find by ID and replace data with req.body
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+      // Return new object, instead of original
       new: true,
       // Validates the new object with the model schema
       runValidators: true,
