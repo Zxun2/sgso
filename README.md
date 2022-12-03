@@ -1,61 +1,43 @@
-# This project is currently ongoing!
-
----
-
-date updated: '2021-08-12T10:51:22+08:00'
-
----
-
 # SG Spots
 
 At a time of unprecedented distancing, this web application aims to connect users by promoting famous SG spots all around Singapore. Favorite stargazing spots? You got it! Famous carpool routes? You got it too!
 
 ## Table of Contents (To be updated)
 
-1. [Application Structure](#Application-Structure)
-2. [API Design](#API-Design)
-3. [Environment Configuration](#EnvironmentConfig)
-4. [Dependencies](#Dependencies)
-5. [Future features](#Future-Features)
-6. [Security Best Practices](#Security_Best_Practices)
-7. Library Used:
-   <details>
-   <summary>Libraries</summary>
-
-   ### Click the links to navigate the page!
-
-   1. [Slugify](#Slugify)
-   2. [Validator](#Validators)
-   3. [bcrypt](#Bcrypt)
-   4. [Crypto](#Crypto)
-   5. [Nodemailer](#Nodemailer)
-   6. [HTMLtoText](#HTMLtoText)
-   7. [Pug](#Pug)
-   8. [Express](#Express)
-   9. [Morgan](#Morgan)
-   10. [Express-rate-limit](#Express-rate-limit)
-   11. [Helmet](#Helmet)
-   12. [Express-mongo-sanitize](#Express-Mongo-Sanitize)
-   13. [Hpp](#Hyperparameter-pollution)
-   14. [Xss-clean](#XSS)
-   15. [Path](#Path)
-   16. [Cookie-parser](#Cookie-parser)
-   17. [Dotenv](#Dotenv)
-   18. [JsonWebToken](#JsonWebToken)
-   19. [Util](#Util)
-   20. [Stripe](#Stripe)
-   21. [Multer](#Multer)
-   22. [Sharp](#Sharp)
-   23. [Axios](#Axios)
-   24. [Mapbox](#Mapbox)
-
-   </details>
+- [SG Spots](#sg-spots)
+  - [Table of Contents (To be updated)](#table-of-contents-to-be-updated)
+    - [Click the links to navigate the page!](#click-the-links-to-navigate-the-page)
+  - [API-Design](#api-design)
+  - [Security\_Best\_Practices](#security_best_practices)
+  - [Future-Features](#future-features)
+  - [EnvironmentConfig](#environmentconfig)
+  - [Dependencies](#dependencies)
+  - [Slugify](#slugify)
+  - [Validators](#validators)
+  - [Bcrypt](#bcrypt)
+  - [Crypto](#crypto)
+  - [Nodemailer](#nodemailer)
+  - [HTMLtoText](#htmltotext)
+  - [Pug](#pug)
+  - [Express](#express)
+  - [Morgan](#morgan)
+  - [Express-rate-limit](#express-rate-limit)
+  - [Helmet](#helmet)
+  - [Express-Mongo-Sanitize](#express-mongo-sanitize)
+  - [Hyperparameters-pollution](#hyperparameters-pollution)
+  - [XSS](#xss)
+  - [Path](#path)
+  - [Cookie-parser](#cookie-parser)
+  - [Dotenv](#dotenv)
+  - [JsonWebToken](#jsonwebtoken)
+  - [Util](#util)
+  - [Stripe](#stripe)
+  - [Multer](#multer)
+  - [Sharp](#sharp)
+  - [Axios](#axios)
+  - [Mapbox](#mapbox)
 
 ---
-
-## Application-Structure
-
-The entire application infrastructure can be found in the folder labelled "Application Structure". Please take the time to look through them.
 
 ## API-Design
 
