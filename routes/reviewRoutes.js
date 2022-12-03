@@ -10,14 +10,10 @@ const {
 const { protect, restrictTo } = require('../controllers/authController');
 const { checkIfBooked } = require('../controllers/bookingController');
 
-//////////////////////////////
-// ROUTES
 // Allows handlers to have access to previous params
 const router = express.Router({ mergeParams: true });
 
-//////////////////////////////
 // Req incoming from /tours/:id/reviews and api/v1/reviews
-
 router.use(protect);
 
 router

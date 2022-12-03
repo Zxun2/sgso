@@ -7,7 +7,6 @@ const slugify = require('slugify');
 const validator = require('validator');
 // const User = require('./userModel');
 
-//////////////////////////////
 // Schema
 const tourSchema = new mongoose.Schema(
   {
@@ -134,14 +133,12 @@ tourSchema.index({ price: 1, ratingsAverage: -1 });
 
 tourSchema.index({ startLocation: '2dsphere' });
 
-//////////////////////////////
 // VIRTUALS - WILL NOT BE PERSISTED TO THE DATABASE
 tourSchema.virtual('durationWeeks').get(function () {
   // use a regular function to access the this keyword
   return this.duration / 7;
 });
 
-//////////////////////////////
 // VIRTUALS POPULATE - field not stored in the schema
 tourSchema.virtual('reviews', {
   ref: 'Review', // Model we want to reference
@@ -150,14 +147,12 @@ tourSchema.virtual('reviews', {
   localField: '_id',
 });
 
-//////////////////////////////
 // DOCUMENT MIDDLEWARE : runs before .save() and .create()
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next(); // remember to call next
 });
 
-//////////////////////////////
 // Embedding Guides into Tours
 // (BAD SOLUTION - Would have to update every tour if tour guide ever changed)
 // To embed is to save the "references" to the database.
@@ -171,7 +166,6 @@ tourSchema.pre('save', async function (next) {
 });
 */
 
-//////////////////////////////
 // QUERY MIDDLEWARE
 // /^find/ deals with both findOne and findMany
 tourSchema.pre(/^find/, function (next) {
@@ -193,7 +187,6 @@ tourSchema.post(/^find/, function (next) {
   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
 });
 
-//////////////////////////////
 // AGGREGATION MIDDLEWARE
 tourSchema.pre('aggregate', function (next) {
   if (!Object.keys(this.pipeline()[0]).includes('$geoNear')) {

@@ -35,8 +35,6 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-//////////////////////////////
-// QUERY MIDDLEWARE
 reviewSchema.pre(/^find/, function (next) {
   // Be careful about chaining such methods. Might lead to slow queries.
   this.populate({
@@ -52,7 +50,6 @@ reviewSchema.pre(/^find/, function (next) {
 // Each combination of tour and user must be unique
 reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
 
-//////////////////////////////
 // STATIC METHOD ON MODEL TO CALC AVERAGE RATINGS
 reviewSchema.statics.calcAverageRatings = async function (tourId) {
   // This points to model
@@ -68,7 +65,6 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
       },
     },
   ]);
-  console.log(stats);
   if (stats.length > 0) {
     await Tour.findByIdAndUpdate(tourId, {
       ratingsQuantity: stats[0].nRating,
@@ -82,7 +78,6 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
   }
 };
 
-//////////////////////////////
 // DOCUMENT/QUERY MIDDLEWARE TO CALC AVERAGE RATINGS
 // If your post hook function takes at least 2 parameters, mongoose will assume the second parameter is a next() function that you will call to trigger the next middleware in the sequence.
 // Works after SAVIING/DELETING/UDPATING

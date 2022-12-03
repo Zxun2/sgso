@@ -16,18 +16,14 @@ const {
 const { protect, restrictTo } = require('../controllers/authController');
 const reviewRouter = require('./reviewRoutes');
 
-//////////////////////////////
-// ROUTES
 const router = express.Router();
 
-// PARAM MIDDLEWARE
 // Looking for params id only
 // router.param('id', (req, res, next, val) => {
 //    console.log(`Tour id is ${val}`);
 //    next();
 // });
 
-//////////////////////////////
 // Req incoming from /tours
 router.use('/:tourId/reviews', reviewRouter); // Rerouting to reviewRouter
 

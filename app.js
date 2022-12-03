@@ -23,13 +23,6 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-//////////////////////////////////////
-// REQUEST -> MIDDLEWARE -> ROUTES  //
-//////////////////////////////////////
-
-//////////////////////////////
-// GLOBAL MIDDLEWARE
-
 // This is a built-in middleware function in Express.
 // It serves static files and is based on serve-static.
 app.use(express.static(path.join(__dirname, `public`)));
@@ -88,12 +81,9 @@ app.use((req, res, next) => {
   next();
 });
 
-///////////////////////////
 // RENDERING TEMPLATES
 app.use('/', viewRouter);
 
-/////////////////////////////////////////////////////////
-// ROUTE MIDDLEWARES
 // ROUTES <- Model (CRUD METHODS) <- Schema (Validation)
 app.use('/api/v1/tours', tourRouter);
 
@@ -109,7 +99,6 @@ app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-//////////////////////////////
 // Global Error Handler
 app.use(globalErrorHandler);
 

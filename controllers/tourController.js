@@ -24,7 +24,7 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-////////////////////////////////////
+//////
 // Upload multiple images
 // upload.array('images', 5)
 exports.uploadTourImages = upload.fields([
@@ -32,7 +32,7 @@ exports.uploadTourImages = upload.fields([
   { name: 'images', maxCount: 3 },
 ]);
 
-////////////////////////////////////
+//////
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
   if (!req.files.imageCover && !req.files.images) return next();
 
@@ -65,7 +65,6 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
   next();
 });
 
-//////////////////////////////
 // Top Tours
 exports.aliasTopTours = (req, res, next) => {
   // Adding these fields to the query
@@ -101,25 +100,23 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
   });
 });
 
-//////////////////////////////
 // CRUD OPERATIONS
-//////////////////////////////
+
 // Get all tours request
 exports.getAllTours = factory.getAll(Tour);
-//////////////////////////////
+
 // Get specific tour request
 exports.getTour = factory.getOne(Tour, { path: 'reviews' });
-//////////////////////////////
+
 // Post new tour
 exports.createTour = factory.createOne(Tour);
-//////////////////////////////
+
 // Update tour
 exports.updateTour = factory.updateOne(Tour);
-//////////////////////////////
+
 // Delete tour
 exports.deleteTour = factory.deleteOne(Tour);
 
-////////////////////////////////////////////
 // Aggregation Pipeline to get Tour Stats
 exports.getTourStats = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([
@@ -152,7 +149,6 @@ exports.getTourStats = catchAsync(async (req, res, next) => {
   console.log('Data aggregated');
 });
 
-///////////////////////////////////////////////
 // Aggregation Pipeline to get monthly plans
 exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
   const year = req.params.year * 1; // transform to number

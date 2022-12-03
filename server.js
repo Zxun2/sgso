@@ -3,7 +3,6 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-//////////////////////////////
 // UNCAUGHT EXCEPTIONS (Should be placed before app)
 process.on('uncaughtException', (err) => {
   console.log('UNHANDLED EXCEPTION 💥 SHUTTING DOWN... ');
@@ -13,13 +12,11 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-//////////////////////////////
 // Configuring environment
 dotenv.config({ path: './config.env' });
 
 const app = require('./app');
 
-//////////////////////////////
 // Connecting to Database
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
@@ -39,14 +36,12 @@ mongoose
     console.log(con.connections, 'DB connected successfully 😂😂')
   );
 
-//////////////////////////////
 // Listening for request
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`App runnning on port ${port}... ❤❤❤`);
 });
 
-//////////////////////////////
 // UNHANDLED PROMISE REJECTIONS
 process.on('unhandledRejection', (err) => {
   console.log('UNHANDLED REJECTIONS 💥 SHUTTING DOWN... ');

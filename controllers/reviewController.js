@@ -8,7 +8,6 @@ exports.createTourUserIds = (req, res, next) => {
   next();
 };
 
-///////////////////////////////
 // CRUD OPERATIONS
 exports.createReview = factory.createOne(Review);
 exports.getReview = factory.getOne(Review);

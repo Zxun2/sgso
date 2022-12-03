@@ -5,7 +5,6 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 
-//////////////////////////////////////
 // Saving images directly to diskStorage
 //- removed as user may upload too large of an image
 // const multerStorage = multer.diskStorage({
@@ -20,7 +19,6 @@ const factory = require('./handlerFactory');
 //   },
 // });
 
-/////////////////////////////////////////////////
 // Upload images
 // Saving images to memory storage instead (creates a buffer)
 const multerStorage = multer.memoryStorage();
@@ -39,11 +37,9 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-/////////////////////////////////////////////////
 // Uploads photo to memory
 exports.uploadPhoto = upload.single('photo');
 
-/////////////////////////////////////////////////
 // Middleware to resize uploaded photo
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
@@ -57,7 +53,6 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   next();
 });
 
-//////////////////////////
 // Helper function for UpdateMe Function
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -68,7 +63,7 @@ const filterObj = (obj, ...allowedFields) => {
   });
   return newObj;
 };
-//////////////////////////
+
 // Update Me fields
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Error if user tries to update password
@@ -122,7 +117,6 @@ exports.createUser = (req, res) => {
   });
 };
 
-//////////////////////////
 // CRUD OPERATIONS
 exports.getAllUsers = factory.getAll(User);
 exports.deleteUser = factory.deleteOne(User);

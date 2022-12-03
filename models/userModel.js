@@ -3,7 +3,6 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
-////////////////////////
 // userSchema
 const userSchema = new mongoose.Schema({
   name: {
@@ -57,7 +56,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-////////////////////////
 // HASHING PASSWORDS - DOCUMENT MIDDLEWARE (PRE HOOK)
 userSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified a.k.a changed/created
@@ -71,7 +69,6 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-////////////////////////
 // Checks if the password has been modified. If so, update field.
 userSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
@@ -81,7 +78,6 @@ userSchema.pre('save', function (next) {
   next();
 });
 
-/////////////////////////////////////////////////
 // REMOVES ALL NON-ACTIVE ACCOUNTS FROM QUERY
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
@@ -89,7 +85,6 @@ userSchema.pre(/^find/, function (next) {
   next();
 });
 
-/////////////////////////////////////////////////
 // Instance - Methods accessible by all documents
 // Unable to access this.password since select is set to false in schema
 // Hence the need to pass in userPassword
@@ -100,7 +95,6 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-/////////////////////////////////////////////////
 // cHECK IF PASSWORD FIELD IS CHANGED AFTER LOGGING IN
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
@@ -116,7 +110,6 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   return false;
 };
 
-/////////////////////////////////////////////////
 // CREATE PASSWORD RESET TOKEN (LESS SECURE)
 userSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex');
@@ -125,8 +118,6 @@ userSchema.methods.createPasswordResetToken = function () {
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
-
-  console.log({ resetToken }, this.passwordResetToken);
 
   // TOKEN EXPIRES IN 10MINS
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;

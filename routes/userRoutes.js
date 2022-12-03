@@ -22,8 +22,6 @@ const {
   logout,
 } = require('../controllers/authController');
 
-//////////////////////////////
-// ROUTES
 const router = express.Router();
 
 router.post('/signup', signUp);
@@ -32,11 +30,9 @@ router.get('/logout', logout);
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
 
-////////////////////////
 // PROTECT SUBSEQUENT ROUTES
 router.use(protect);
 
-////////////////////////
 // REQURIES LOG IN
 router.patch('/updateMe', uploadPhoto, resizeUserPhoto, updateMe);
 router.delete('/deleteMe', deleteMe);
@@ -44,7 +40,6 @@ router.get('/me', getMe, getUser);
 
 router.patch('/updateMyPassword', updatePassword);
 
-//////////////////////////
 // RESTRICT SUBSEQUENT ROUTES TO ADMIN ONLY
 router.use(restrictTo('admin'));
 
